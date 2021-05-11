@@ -13,6 +13,8 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import pojoClass.POJO_AddPlace;
 import pojoClass.POJO_Location;
+import resources.TestDataBuild;
+
 import static io.restassured.RestAssured.given;
 
 public class AddPlaceAPI2 {
@@ -23,25 +25,9 @@ public class AddPlaceAPI2 {
 	    // Write code here that turns the phrase above into concrete actions
 	    RestAssured.baseURI="https://rahulshettyacademy.com";
 	    
-	    POJO_AddPlace p =new POJO_AddPlace();
-		p.setAccuracy(50);
-		p.setAddress("29, side layout, cohen 09");
-		p.setLanguage("French-IN");
-		p.setPhone_number("(+91) 983 893 3937");
-		p.setWebsite("https://rahulshettyacademy.com");
-		p.setName("Frontline house");
-		List<String> myList =new ArrayList<String>();
-		myList.add("shoe park");
-		myList.add("shop");
-
-		p.setTypes(myList);
-		POJO_Location l =new POJO_Location();
-		l.setLat(-38.383494);
-		l.setLng(33.427362);
-
-		p.setLocation(l);
+	    TestDataBuild payload=new TestDataBuild();
 		
-		request=given().queryParam("key", "qaclick123").body(p);
+		request=given().queryParam("key", "qaclick123").body(payload.addPlacePayload());
 	}
 
 	@When("User POST request")
